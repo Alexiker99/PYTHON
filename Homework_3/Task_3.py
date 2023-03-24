@@ -20,4 +20,5 @@ telephone = input('Введите телефон')
 '''
 def my_func (name, surname, year, city, email, telephone):
      return ' '.join([name, surname, year, city, email, telephone])
-print(my_func(surname = 'Леонтьев', name = 'Алексей', year = '1995', city = 'Сызрань', email = 'error@mail.ru', telephone = '8-800-555-35-35'))
+print(my_func(surname = 'Фамилия: Леонтьев', name = 'Имя: Алексей', year = 'Год рождения: 1995', 
+   city = 'Город: Сызрань', email = '@email: error@mail.ru', telephone = 'Телефон: 8-800-555-35-35'))
