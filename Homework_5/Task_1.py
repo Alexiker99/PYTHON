@@ -29,3 +29,31 @@
 # Введите первое число: вп
 # Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 # Введите операцию (+, -, *, / или 0 для выхода):
+
+def get_int_from_user(message):
+    try:
+        n = int(input(message))
+    except ValueError:
+        return
+    else:
+        return n
+
+
+def start_app(catalog_operations):
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operation in catalog_operations:
+        a = get_int_from_user("Введите 1 число: ")
+        b = get_int_from_user("Введите 2 число: ")
+        if a is not None and b is not None:
+            print(f'Ваш ответ: {catalog_operations[operation](a, b)}')
+            return start_app(catalog_operations)
+    if operation == '0':
+        print('Готово!')
+        return
+    print('Ошибка, повторите')
+    return start_app(catalog_operations)
+
+
+if __name__ == "__main__":
+    operations = {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}
+    start_app(operations)
