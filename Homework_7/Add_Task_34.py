@@ -15,3 +15,28 @@
 #
 # Вывод:** Парам пам-пам  
 
+class Song:
+
+    def __init__(self, text):
+        self.text = text
+
+    def pooh_analiz(self):
+        flag = True
+        tmp = 0
+        for frase in self.text.split(' '):
+            count = 0
+            small = frase.split('-')
+            for word in small:
+                for ch in word:
+                    if ch in "ауоыиэяюёе":
+                        count += 1
+            if tmp == 0:
+                tmp = count
+            if tmp != count:
+                flag = False
+                break
+        return "Парам пам-пам" if flag else "Пам парам"
+
+
+obj = Song("пара-ра-рам рам-пам-папам па-ра-па-да")
+print(obj.pooh_analiz())
