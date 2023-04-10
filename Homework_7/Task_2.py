@@ -14,3 +14,20 @@
 # Проверить работу метода.
 # 
 # Например: 20м*5000м*25кг*0.05м = 125000 кг = 125 т
+
+class Road:
+    square = 340
+    height = 1
+
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def count_materials(self):
+        mass = int(self._length * self._width * self.square * self.height)
+        return f"{self._width}м*{self._length}м*{self.height}кг*{self.height}м = {mass}кг" \
+               f"{' = ' + str(mass / 1000) + ' т' if mass // 1000 > 0 else ''}"
+
+
+obj = Road(10000, 25)
+print(obj.count_materials())
