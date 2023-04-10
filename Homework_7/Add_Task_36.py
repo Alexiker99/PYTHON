@@ -18,3 +18,31 @@
 # 4 8 12 16 20 24
 # 5 10 15 20 25 30
 # 6 12 18 24 30 36
+
+class DataTable:
+    data = []
+    num_rows = 0
+    num_columns = 0
+
+    def print_array(self):
+        for i in self.data:
+            for j in i:
+                print(f"{j}", end=" ")
+            print()
+
+    def print_operation_table(self, operation, num_rows, num_columns):
+        self.num_rows = num_rows
+        self.num_columns = num_columns
+        self.data.append([el + 1 for el in range(num_columns)])
+        for el in range(1, num_rows):
+            self.data.append([el + 1])
+        for row in range(1, num_rows):
+            for col in range(1, num_columns):
+                numb = eval("lambda " + operation)
+                self.data[col].append(
+                    numb(self.data[col][0], self.data[row][0]))
+        self.print_array()
+
+
+obj = DataTable()
+obj.print_operation_table("x, y: x * y", 6, 6)
