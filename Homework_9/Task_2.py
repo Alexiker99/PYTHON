@@ -1,26 +1,27 @@
 # Реализовать метакласс. позволяющий создавать всегда один и тот же объект класса (см. урок)
-
-class SingleServer(type):
-    Server = None
+class NewMetaClass(type):
+    a = None
 
     def __call__(cls):
-        if cls.Server is None:
-            cls.Server = super().__call__()
-            return cls.Server
-        return cls.Server
+        if cls.a is None:
+            cls.a = super().__call__()
+            a = cls.a
+            return cls.a
+        return cls.a
 
 
-class MainServer(metaclass=SingleServer):
-    server_name = 'uni-server'
-    port = 3535
+class MyClass(metaclass=NewMetaClass):
 
-    def __str__(self):
-        return f'Server is running'
+    def method_1(self):
+        pass
+
+    def method_1(self):
+        print("Ошибка")
 
 
-Server_mess = MainServer()
-Server_app = MainServer()
-Server_web = MainServer()
-
-print(Server_app is Server_mess)
-print(Server_mess is Server_app)
+obj_1 = MyClass()
+obj_2 = MyClass()
+obj_3 = MyClass()
+print(obj_1 is obj_2
+      and obj_2 is obj_3
+      and obj_1 is obj_3)
