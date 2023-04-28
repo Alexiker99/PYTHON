@@ -14,7 +14,7 @@ byte_list = [word.encode() for word in words_list]
 for i, word in enumerate(byte_list):
     print(f"{words_list[i]} = {byte_list}")
 
-decoded_array = [byte_word.decode() for byte_word in byte_list]
+decoded_list = [byte_word.decode() for byte_word in byte_list]
 
-for word in decoded_array:
+for word in decoded_list:
     print(word)
