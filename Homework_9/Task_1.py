@@ -83,7 +83,53 @@ class Message:
                f'id отправителя: {self.sender_id}, получателя: {self.receiver_id}'
 
 
-new_user = User(5, 'Петров Иван', datetime.datetime.now())
+class TypeValidation:
+
+    def __get__(self, instance, owner):
+        return instance.__dict__[self.my_attr]
+
+    def __set__(self, instance, value):
+        if not isinstance(value, str):
+            raise TypeError("Введенное значение должно быть строкой")
+        instance.__dict__[self. my_attr] = value
+
+    def __delete__(self, instance):
+        del instance.__dict__[self. my_attr]
+
+    def __set_name__(self, owner, my_attr):
+        self.my_attr = my_attr
+
+
+class Worker:
+    name = TypeValidation()
+    surname = TypeValidation()
+    position = TypeValidation()
+
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = {"wage": wage, "bonus": bonus}
+
+
+class Position(Worker):
+
+    def get_full_name(self):
+        return f'Сотрудник {self.name} {self.surname}, находится в должности: ' \
+               f'{self.position}.'
+
+    def get_total_income(self):
+        return f'Доход всего составляет: {self._income["wage"] + self._income["bonus"]}'
+
+    def __str__(self):
+        return f'{self.get_full_name()} {Position.get_total_income(self)}'
+
+
+new_user = User(5, 'Перцев Александр', datetime.datetime.now())
 print(new_user)
-new_message = Message(1, 'Иван, привет!', 3, 5, datetime.datetime.now())
+new_message = Message(1, 'Александр, здравствуйте!', 3, 5, datetime.datetime.now())
 print(new_message)
+worker = Position(11165, 'Перцев', 'Мастер', 50000, 5000)
+print(worker.get_full_name())
+print(worker.get_total_income())
+print(worker)
